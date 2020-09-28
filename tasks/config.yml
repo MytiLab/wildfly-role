@@ -21,8 +21,8 @@
     - { src: "wildfly.conf.j2",
         dest: "{{ wildfly_conf_path }}/wildfly.conf",
         permissions: "0640" }
-    - { src: "standalone.xml.j2",
-        dest: "{{ wildfly_home_path }}/standalone/configuration/standalone.xml",
+    - { src: "standalone-full.xml.j2",
+        dest: "{{ wildfly_home_path }}/standalone/configuration/standalone-full.xml",
         permissions: "0644" }
   notify: restart WildFly
 
@@ -79,6 +79,6 @@
 - name: WildFly | Copy Daemon script
   template:
     src: wildfly.service.j2
-    dest: /lib/systemd/system/wildfly.service
+    dest: /etc/systemd/system/wildfly.service
     mode: 0644
   notify: restart WildFly

@@ -39,6 +39,7 @@ wildfly_log_file_maxBackupIndex: 7
 
 # Network
 wildfly_bind: 0.0.0.0
+wildfly_bind_management: 0.0.0.0
 
 # Management
 wildfly_management_users: []
