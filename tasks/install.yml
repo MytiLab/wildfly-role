@@ -18,7 +18,7 @@
   command: systemctl status wildfly.service
   ignore_errors: yes
   changed_when: false
-  no_log: true
+  no_log: false
   register: service_wildfly_status
 
 - name: WildFly | Check installed version
@@ -28,7 +28,7 @@
   register: wildfly_check
   changed_when: false
   ignore_errors: true
-  no_log: true
+  no_log: false
   when: service_wildfly_status | success
 
 - name: WildFly | Download WildFly binaries
@@ -38,9 +38,8 @@
   when: |
       "Loaded: not-found" in service_wildfly_status.stdout or
       "service could not be found" in service_wildfly_status.stderr or
-      (service_wildfly_status | success and
-        (wildfly_check | failed or
-        "\"result\" => \"{{ wildfly_version }}\"" not in wildfly_check.stdout))
+      (service_wildfly_status and
+        (wildfly_check  or "\"result\" => \"{{ wildfly_version }}\"" not in wildfly_check.stdout))
 
 - name: WildFly | Extract wildfly in the install directory
   unarchive:
@@ -52,8 +51,8 @@
   when: |
       "Loaded: not-found" in service_wildfly_status.stdout or
       "service could not be found" in service_wildfly_status.stderr or
-      (service_wildfly_status | success and
-        (wildfly_check | failed or
+      (service_wildfly_status and
+        (wildfly_check  or
         "\"result\" => \"{{ wildfly_version }}\"" not in wildfly_check.stdout))
 
 - name: WildFly | Create Symlink to WildFly
@@ -67,8 +66,8 @@
   when: |
       "Loaded: not-found" in service_wildfly_status.stdout or
       "service could not be found" in service_wildfly_status.stderr or
-      (service_wildfly_status | success and
-        (wildfly_check | failed or
+      (service_wildfly_status and
+        (wildfly_check or
         "\"result\" => \"{{ wildfly_version }}\"" not in wildfly_check.stdout))
 
 - name: WildFly | Create log path
