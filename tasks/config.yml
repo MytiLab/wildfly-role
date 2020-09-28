@@ -21,8 +21,8 @@
     - { src: "wildfly.conf.j2",
         dest: "{{ wildfly_conf_path }}/wildfly.conf",
         permissions: "0640" }
-    - { src: "standalone.xml.j2",
-        dest: "{{ wildfly_home_path }}/standalone/configuration/standalone.xml",
+    - { src: "standalone-full.xml.j2",
+        dest: "{{ wildfly_home_path }}/standalone/configuration/standalone-full.xml",
         permissions: "0644" }
   notify: restart WildFly
 
