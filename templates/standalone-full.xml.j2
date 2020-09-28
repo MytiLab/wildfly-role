@@ -39,7 +39,13 @@
         <extension module="org.wildfly.extension.undertow"/>
         <extension module="org.wildfly.iiop-openjdk"/>
     </extensions>
-
+    <system-properties>
+      <!-- Custom repository location. -->
+      <property name="org.uberfire.nio.git.dir" value="/home/{{ ansible_ssh_user }}/repositories"/>
+      <!-- Make GIT repositories available from outside localhost. -->
+      <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
+      <property name="org.uberfire.nio.git.daemon.host" value="0.0.0.0"/>
+    </system-properties>
     <management>
         <security-realms>
             <security-realm name="ManagementRealm">
