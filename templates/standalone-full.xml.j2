@@ -40,11 +40,15 @@
         <extension module="org.wildfly.iiop-openjdk"/>
     </extensions>
     <system-properties>
-      <!-- Custom repository location. -->
-      <property name="org.uberfire.nio.git.dir" value="/home/{{ ansible_ssh_user }}/repositories"/>
-      <!-- Make GIT repositories available from outside localhost. -->
-      <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
-      <property name="org.uberfire.nio.git.daemon.host" value="0.0.0.0"/>
+        <!-- Custom repository location. -->
+        <property name="org.uberfire.nio.git.dir" value="/home/{{ ansible_ssh_user }}/repositories"/>
+        <!-- Make GIT repositories available from outside localhost. -->
+        <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
+        <property name="org.uberfire.nio.git.daemon.host" value="0.0.0.0"/>
+        <!-- Guvnor repository dir -->
+        <property name="org.guvnor.m2repo.dir" value="/home/{{ ansible_ssh_user }}/repositories/kie"/>
+        <!-- index -->
+        <property name="org.uberfire.metadata.index.dir" value="/home/{{ ansible_ssh_user }}/repositories"/>
     </system-properties>
     <management>
         <security-realms>
